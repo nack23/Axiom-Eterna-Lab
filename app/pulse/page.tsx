@@ -17,6 +17,10 @@ import {
   Users,
   Trophy,
   Crown,
+  Leaf,
+  PenTool,
+  ChefHat,
+  Crosshair,
 } from "lucide-react";
 
 /* ===========================================================
@@ -55,20 +59,21 @@ type LiveTokenRow = TokenRow & {
   direction: "up" | "down" | "none";
 };
 
+/* ========= YAHAN 10 MOCK TOKENS HAIN ========= */
 const MOCK_TOKENS: TokenRow[] = [
   {
     id: "1",
     name: "Joobi",
     symbol: "Joobi",
     age: "53m",
-    mc: "$2K",
+    mc: "$318",
     volume: "$5.57K",
     tx: 6,
     crown: "0/11",
     addr: "0xf9...4444",
-    change: "0%",
+    change: "2%",
     avatarColor: "from-[#38bdf8] to-[#0ea5e9]",
-    price: 0,
+    price: 0.00001,
   },
   {
     id: "2",
@@ -82,7 +87,119 @@ const MOCK_TOKENS: TokenRow[] = [
     addr: "0x6d...4444",
     change: "0%",
     avatarColor: "from-[#22c55e] to-[#16a34a]",
+    price: 0.00002,
+  },
+  {
+    id: "3",
+    name: "BENJI",
+    symbol: "Benji",
+    age: "6m",
+    mc: "$3K",
+    volume: "$5.14K",
+    tx: 2,
+    crown: "2/352",
+    addr: "0x76...4444",
+    change: "4%",
+    avatarColor: "from-[#fb923c] to-[#ea580c]",
+    price: 0.00007,
+  },
+  {
+    id: "4",
+    name: "TIEN",
+    symbol: "Tien Shinhan",
+    age: "10m",
+    mc: "$1K",
+    volume: "$5.15K",
+    tx: 5,
+    crown: "1/159",
+    addr: "0x0d...4444",
+    change: "10%",
+    avatarColor: "from-[#22c55e] to-[#16a34a]",
     price: 0.00029,
+  },
+  {
+    id: "5",
+    name: "RXD",
+    symbol: "RXD",
+    age: "6h",
+    mc: "$12K",
+    volume: "$44.4K",
+    tx: 48,
+    crown: "0/1",
+    addr: "0x83...4444",
+    change: "71%",
+    avatarColor: "from-[#38bdf8] to-[#1d4ed8]",
+    price: 0.00000,
+  },
+  {
+    id: "6",
+    name: "YAP",
+    symbol: "Yap2Earn",
+    age: "6h",
+    mc: "$123K",
+    volume: "$30.6K",
+    tx: 1295,
+    crown: "0/1",
+    addr: "0x02...4444",
+    change: "31%",
+    avatarColor: "from-[#22c55e] to-[#15803d]",
+    price: 0.00019,
+  },
+  {
+    id: "7",
+    name: "BNBGIVING",
+    symbol: "BNBGIVING",
+    age: "2m",
+    mc: "$1K",
+    volume: "$5.77K",
+    tx: 4,
+    crown: "8/921",
+    addr: "0xe2...4444",
+    change: "8%",
+    avatarColor: "from-[#f97316] to-[#ea580c]",
+    price: 0.00031,
+  },
+  {
+    id: "8",
+    name: "BNBElivers",
+    symbol: "BNBElivers",
+    age: "2m",
+    mc: "$5K",
+    volume: "$6.01K",
+    tx: 4,
+    crown: "3/265",
+    addr: "0x78...4444",
+    change: "13%",
+    avatarColor: "from-[#22c55e] to-[#16a34a]",
+    price: 0.00021,
+  },
+  {
+    id: "9",
+    name: "THANKSGIVING",
+    symbol: "Thanksgiving",
+    age: "2m",
+    mc: "$2K",
+    volume: "$5.15K",
+    tx: 6,
+    crown: "7/429",
+    addr: "0x6c...4444",
+    change: "15%",
+    avatarColor: "from-[#38bdf8] to-[#0ea5e9]",
+    price: 0.00018,
+  },
+  {
+    id: "10",
+    name: "Sarah",
+    symbol: "Justice for Sarah",
+    age: "24s",
+    mc: "$443",
+    volume: "$6K",
+    tx: 3,
+    crown: "0/2",
+    addr: "0xa1...4444",
+    change: "7%",
+    avatarColor: "from-[#f97316] to-[#ec4899]",
+    price: 0.00003,
   },
 ];
 
@@ -333,9 +450,6 @@ function PulseColumnCard({
 }
 
 /* ===========================================================
-   ROW VIEW – final tuned
-=========================================================== */
-/* ===========================================================
    ROW VIEW – name line + V/MC on right above TX
 =========================================================== */
 function TokenRowView({ token }: { token: LiveTokenRow }) {
@@ -361,64 +475,73 @@ function TokenRowView({ token }: { token: LiveTokenRow }) {
 
           {/* TEXT AREA */}
           <div className="flex flex-col min-w-0 w-full">
-            {/* 1) NAME + FULL SYMBOL + DOC (LEFT), RIGHT SIDE EMPTY */}
+            {/* 1) NAME + FULL SYMBOL + DOC (LEFT) */}
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center gap-2 min-w-0">
-                {/* Name bold (e.g. Sarah) */}
                 <span className="text-[18px] font-semibold tracking-tight truncate max-w-[140px]">
                   {token.name}
                 </span>
 
-                {/* Full symbol / long name (e.g. Justice for Sarah) */}
                 <span className="text-[14px] text-slate-300 truncate">
                   {token.symbol}
                 </span>
 
-                {/* Doc square icon */}
                 <span className="h-4 w-3 rounded-[2px] border border-slate-500/70" />
               </div>
 
-              {/* Yahan pe kuch nahi, right block ab side wale section me hai */}
               <div className="flex-shrink-0" />
             </div>
 
-            {/* 2) COMPACT ICON ROW */}
-            <div className="mt-1 flex items-center gap-[10px] text-[12px] text-slate-200 h-[20px]">
+            {/* 2) AGE + ICON ROW (leaf, pen, hand, search, users, trophy, crown) */}
+            <div className="mt-1 flex items-center gap-[10px] text-[12px] text-slate-200 h-[22px]">
               <span className="text-emerald-400 text-[14px] font-semibold">
                 {token.age}
               </span>
 
-              <span className="text-emerald-400 text-[12px] -ml-[3px]">✒</span>
-              <Hand className="h-[13px] w-[13px] -ml-[2px]" />
-              <Search className="h-[13px] w-[13px] -ml-[2px]" />
+              <Leaf className="h-[14px] w-[14px] text-emerald-400" />
+              <PenTool className="h-[14px] w-[14px] text-emerald-400" />
+              <Hand className="h-[14px] w-[14px] text-slate-200" />
+              <Search className="h-[14px] w-[14px] text-slate-200" />
 
-              <span className="flex items-center gap-[3px] -ml-[2px]">
-                <Users className="h-[13px] w-[13px]" />
-                <span className="text-[11px]">3</span>
+              <span className="flex items-center gap-[3px]">
+                <Users className="h-[14px] w-[14px] text-slate-300" />
+                <span className="text-[11px] text-slate-100">3</span>
               </span>
 
-              <span className="flex items-center gap-[3px] -ml-[2px]">
-                <Trophy className="h-[13px] w-[13px]" />
-                <span className="text-[11px]">0</span>
+              <span className="flex items-center gap-[3px]">
+                <Trophy className="h-[14px] w-[14px] text-slate-300" />
+                <span className="text-[11px] text-slate-100">0</span>
               </span>
 
-              <span className="flex items-center gap-[3px] -ml-[2px]">
-                <Crown className="h-[13px] w-[13px]" />
-                <span className="text-[11px]">{token.crown}</span>
+              <span className="flex items-center gap-[3px]">
+                <Crown className="h-[14px] w-[14px] text-slate-300" />
+                <span className="text-[11px] text-slate-100">
+                  {token.crown}
+                </span>
               </span>
             </div>
 
-            {/* 3) TAGS (pills) */}
-            <div className="mt-2 flex items-center gap-2 text-[11px]">
-              <span className="px-2 py-[4px] rounded-full border border-emerald-600/30 bg-[#04100a] text-emerald-400">
-                2%
-              </span>
-              <span className="px-2 py-[4px] rounded-full border border-blue-600/30 bg-[#04101a] text-blue-400">
-                DS
-              </span>
-              <span className="px-2 py-[4px] rounded-full border border-emerald-600/30 bg-[#04100a] text-emerald-400">
-                0%
-              </span>
+            {/* 3) TAGS (pills) – Axiom-style */}
+            <div className="mt-2 flex items-center gap-1 text-[10px]">
+              {/* left pill: user + % */}
+              <div className="flex items-center gap-1 rounded-full border border-emerald-500/40 bg-[#040f0a] px-2 py-[3px]">
+                <Users className="h-[12px] w-[12px] text-emerald-400" />
+                <span className="text-[11px] text-emerald-400">2%</span>
+              </div>
+
+              {/* middle pill: chef hat + DS (blue) */}
+              <div className="flex items-center gap-2 rounded-full border border-[#020887] bg-[#020817] px-2 py-[3px]">
+                <ChefHat className="h-[12px] w-[12px] text-[#6366f1]" />
+                <span className="text-[11px] font-semibold text-[#6366f1]">
+                  DS
+                </span>
+              </div>
+
+              {/* right pill: target + % */}
+              <div className="flex items-center gap-1 rounded-full border border-emerald-500/40 bg-[#040f0a] px-2 py-[3px]">
+                <Crosshair className="h-[12px] w-[12px] text-emerald-400" />
+                <span className="text-[11px] text-emerald-400">0%</span>
+              </div>
             </div>
           </div>
         </div>
@@ -441,23 +564,18 @@ function TokenRowView({ token }: { token: LiveTokenRow }) {
             </span>
           </div>
 
-          {/* 2) TX + BAR */}
-         <div className="flex items-center gap-2 w-full justify-end text-[12px]">
-  <span>TX {token.tx}</span>
+          {/* 2) TX + 2-part BAR */}
+          <div className="flex items-center gap-2 w-full justify-end text-[12px]">
+            <span>TX {token.tx}</span>
 
-  {/* 2-part TX bar */}
-  <div className="flex h-[4px] w-[70px] overflow-hidden rounded-full">
-    <div className="h-full w-[60%] bg-emerald-400"></div>
-    <div className="h-full w-[40%] bg-rose-500"></div>
-  </div>
-</div>
-
+            <div className="flex h-[4px] w-[70px] overflow-hidden rounded-full">
+              <div className="h-full w-[60%] bg-emerald-400" />
+              <div className="h-full w-[40%] bg-rose-500" />
+            </div>
+          </div>
 
           {/* 3) SIMPLE BNB RECTANGLE */}
-          <div
-            className="mt-2 flex h-[55px] w-[180px] items-center justify-center 
-                       rounded-[4px] bg-[#4f6bff] text-white"
-          >
+          <div className="mt-2 flex h-[55px] w-[180px] items-center justify-center rounded-[4px] bg-[#4f6bff] text-white">
             <span className="mr-2 text-[16px]">⚡</span>
             <span className="text-[14px] font-semibold">
               {token.price.toFixed(5)} BNB
